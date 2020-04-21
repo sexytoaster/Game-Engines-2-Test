@@ -7,6 +7,7 @@ public class SpawnTrafficLights : MonoBehaviour
     public float lightCount;
     public float radius;
     public GameObject trafficLight;
+    public GameObject Car;
     private Vector3 centrePos = new Vector3 (0, 0, 0);
 
     // Start is called before the first frame update
@@ -26,5 +27,6 @@ public class SpawnTrafficLights : MonoBehaviour
             Vector3 position = centrePos + (direction * radius);
             Instantiate(trafficLight, position, rotation);
         }
+        Instantiate(Car, centrePos, Quaternion.identity);
     }
 }

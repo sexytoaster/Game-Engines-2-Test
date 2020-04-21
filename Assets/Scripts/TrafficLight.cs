@@ -8,7 +8,7 @@ public class TrafficLight : MonoBehaviour
     private bool first = true;
     
 
-    private void Start()
+    private void OnEnable()
     {
         int initialState = Random.Range(0, 3);
 
