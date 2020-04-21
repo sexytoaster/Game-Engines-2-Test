@@ -17,6 +17,11 @@ class FindTargetState : State
         owner.GetComponent<Arrive>().enabled = true;
         owner.GetComponent<carController>().targetTrafficLight = target;
     }
+
+    public override void Exit()
+    {
+        owner.GetComponent<Arrive>().enabled = false;
+    }
 }
 public class carController : MonoBehaviour
 {
@@ -30,9 +35,14 @@ public class carController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(targetTrafficLight.tag != "Green")
+        if (targetTrafficLight == null)
+        {
+            GetComponent<StateMachine>().ChangeState(new FindTargetState());
+        }
+        if(targetTrafficLight.tag != "Green" || Vector3.Distance(targetTrafficLight.transform.position, this.transform.position) <= 1)
         {
             GetComponent<StateMachine>().ChangeState(new FindTargetState());
         }
     }
+    
 }
